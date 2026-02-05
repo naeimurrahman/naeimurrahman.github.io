@@ -18,25 +18,23 @@
   --success:#16a34a;
 }
 *{box-sizing:border-box}
-
 body{
   margin:0;
-  font-family:'Inter', system-ui, sans-serif;
+  font-family:'Inter',system-ui,sans-serif;
   background:var(--bg);
   color:var(--text);
 }
 
+/* LAYOUT */
 .container{
   max-width:920px;
   margin:auto;
   padding:32px 18px;
 }
-
-/* TOP */
 .topbar{
   display:flex;
   justify-content:flex-end;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 .toggle button{
   padding:6px 12px;
@@ -54,7 +52,7 @@ body{
   border:1px solid var(--border);
   border-radius:20px;
   padding:60px 32px;
-  margin-bottom:36px;
+  margin-bottom:26px;
 }
 .hero h1{
   font-size:38px;
@@ -64,6 +62,17 @@ body{
   font-size:18px;
   color:var(--muted);
   max-width:640px;
+}
+
+/* HINT */
+#hint{
+  display:none;
+  margin:18px 0;
+  padding:14px 18px;
+  background:#eef2ff;
+  border:1px solid #e0e7ff;
+  border-radius:12px;
+  font-size:15px;
 }
 
 /* ACCORDION */
@@ -76,7 +85,16 @@ body{
   transition:all .25s ease;
 }
 .accordion:hover{background:#fafafa}
-.accordion.recommended{border-left:4px solid var(--primary)}
+.accordion.active{
+  animation:pop .25s ease;
+}
+@keyframes pop{
+  0%{transform:scale(.98)}
+  100%{transform:scale(1)}
+}
+.accordion.recommended{
+  border-left:4px solid var(--primary);
+}
 
 .acc-header{
   padding:20px 22px;
@@ -95,12 +113,11 @@ body{
   color:var(--muted);
   transition:.3s;
 }
-
 .acc-content{
   max-height:0;
   overflow:hidden;
   padding:0 22px;
-  transition:max-height .4s ease, padding .3s ease;
+  transition:max-height .45s ease,padding .3s ease;
 }
 .acc-content p,
 .acc-content li{
@@ -114,7 +131,6 @@ body{
   border:none;
   margin-top:14px;
 }
-
 .accordion.active .acc-content{
   max-height:2600px;
   padding-bottom:22px;
@@ -130,7 +146,20 @@ body{
   margin-left:8px;
 }
 
-/* LOCK + PRICE */
+/* DEMO FOCUS */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.45);
+  display:none;
+  z-index:5;
+}
+.demo-focus{
+  position:relative;
+  z-index:6;
+}
+
+/* PRICE */
 .lock{
   background:#fff7ed;
   color:#9a3412;
@@ -169,7 +198,10 @@ body{
   text-decoration:none;
   font-size:15px;
 }
-.cta a:hover{background:#1d4ed8}
+.cta a:hover{
+  background:#1d4ed8;
+  box-shadow:0 10px 30px rgba(37,99,235,.35);
+}
 
 footer{
   text-align:center;
@@ -185,10 +217,14 @@ footer{
 
 <body>
 
+<div id="overlay" class="overlay"></div>
+
 <div class="container">
 
 <div class="topbar">
-  <div class="toggle"><button onclick="toggleLang()">বাংলা / English</button></div>
+  <div class="toggle">
+    <button onclick="toggleLang()">বাংলা / English</button>
+  </div>
 </div>
 
 <!-- ================= ENGLISH ================= -->
@@ -196,8 +232,10 @@ footer{
 
 <div class="hero">
   <h1>WhatsApp Automation for Business</h1>
-  <p>See—step by step—how this system stops missed leads and saves time.</p>
+  <p>Explore step by step how this system stops missed leads — interactively.</p>
 </div>
+
+<div id="hint">👀 Most business owners try the live demo next</div>
 
 <div class="accordion active">
   <div class="acc-header">
@@ -209,7 +247,7 @@ footer{
       <li>Late replies after form submission</li>
       <li>Manual WhatsApp handling</li>
       <li>Busy hours = missed leads</li>
-      <li>No proper follow-up system</li>
+      <li>No proper follow-up</li>
     </ul>
   </div>
 </div>
@@ -274,7 +312,7 @@ footer{
 
 <div class="hero">
   <h1>WhatsApp Automation for Business</h1>
-  <p>ধাপে ধাপে দেখুন—কেন এই সিস্টেমটা লিড মিস হওয়া বন্ধ করে</p>
+  <p>ধাপে ধাপে, ইন্টার‌্যাক্টিভ ভাবে দেখুন সিস্টেমটি কীভাবে কাজ করে</p>
 </div>
 
 <div class="accordion active">
@@ -313,7 +351,7 @@ footer{
     <div class="arrow">›</div>
   </div>
   <div class="acc-content">
-    <p>ফর্মটি পূরণ করলে সাথে সাথে WhatsApp পাবেন।</p>
+    <p>ফর্ম পূরণ করলে সাথে সাথে WhatsApp পাবেন।</p>
     <iframe src="PASTE_GOOGLE_FORM_EMBED_LINK"></iframe>
   </div>
 </div>
@@ -347,18 +385,31 @@ footer{
 </div>
 
 <script>
-/* Accordion control */
+/* Accordion logic + fun */
 const accs=document.querySelectorAll('.accordion');
+let opened=0;
 accs.forEach(acc=>{
   acc.querySelector('.acc-header').addEventListener('click',()=>{
     accs.forEach(a=>{if(a!==acc)a.classList.remove('active')});
     acc.classList.toggle('active');
     acc.scrollIntoView({behavior:'smooth',block:'start'});
+    opened++;
+    if(opened===3){document.getElementById('hint').style.display='block';}
+
     if(acc.id==='demoEn'){
-      lockEn.style.display='none'; priceBoxEn.style.display='block';
+      overlay.style.display='block';
+      acc.classList.add('demo-focus');
+      lockEn.style.display='none';
+      priceBoxEn.style.display='block';
+    }else{
+      overlay.style.display='none';
+      document.querySelectorAll('.demo-focus').forEach(d=>d.classList.remove('demo-focus'));
     }
     if(acc.id==='demoBn'){
-      lockBn.style.display='none'; priceBoxBn.style.display='block';
+      overlay.style.display='block';
+      acc.classList.add('demo-focus');
+      lockBn.style.display='none';
+      priceBoxBn.style.display='block';
     }
   });
 });
