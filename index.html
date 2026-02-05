@@ -2,82 +2,93 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>WhatsApp Automation for Business</title>
+<title>WhatsApp Automation Funnel</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
-  font-family:'Segoe UI', sans-serif;
+  font-family:'Segoe UI',sans-serif;
   background:#f4f6fb;
   color:#111;
 }
 .container{
-  max-width:1100px;
+  max-width:900px;
   margin:auto;
-  padding:40px 20px;
+  padding:30px 20px;
 }
-.toggle{
-  text-align:right;
-  margin-bottom:15px;
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
 }
-.toggle button{
-  padding:8px 14px;
+.progress{
+  font-size:14px;
+  color:#555;
+}
+.lang button{
+  padding:6px 12px;
   border:none;
-  border-radius:8px;
+  border-radius:6px;
   background:#4f46e5;
   color:#fff;
   cursor:pointer;
-  font-size:14px;
+  font-size:13px;
 }
-.hero{
-  background:linear-gradient(135deg,#4f46e5,#06b6d4);
+
+.step{
+  display:none;
+  background:#fff;
+  padding:35px 25px;
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
+.step.active{display:block;}
+
+h1,h2{text-align:center;}
+p,li{font-size:18px;line-height:1.6;}
+
+button.next{
+  margin-top:30px;
+  padding:14px 24px;
+  font-size:16px;
+  background:#4f46e5;
   color:#fff;
-  padding:70px 30px;
-  border-radius:22px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+.center{text-align:center;}
+
+iframe{
+  width:100%;
+  height:600px;
+  border:none;
+  margin-top:20px;
+}
+
+.price{
+  background:#f1f5ff;
+  padding:20px;
+  border-radius:12px;
+  margin-top:15px;
   text-align:center;
 }
-.hero h1{font-size:38px;margin-bottom:10px;}
-.hero p{font-size:18px;opacity:.95;}
-
-.section{margin-top:70px;}
-.section h2{text-align:center;font-size:28px;margin-bottom:30px;}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:25px;
-}
-.card{
-  background:#fff;
-  padding:28px;
-  border-radius:18px;
-  box-shadow:0 12px 28px rgba(0,0,0,.06);
-}
-.card h3{color:#4f46e5;margin-bottom:10px;}
-
-ul li, ol li{margin-bottom:12px;font-size:17px;}
-
-.demo{
-  background:#fff;
-  padding:35px;
-  border-radius:18px;
-  box-shadow:0 12px 28px rgba(0,0,0,.06);
-}
-iframe{width:100%;height:650px;border:none;}
+.price strong{font-size:22px;}
 
 .cta{
-  background:#0f172a;
-  color:#fff;
-  padding:60px 25px;
-  border-radius:24px;
-  text-align:center;
-  margin-top:80px;
+  margin-top:25px;
 }
-footer{text-align:center;margin:40px 0 20px;color:#777;font-size:14px;}
-
-.lang{display:none;}
-.lang.active{display:block;}
+.cta a{
+  display:inline-block;
+  padding:14px 22px;
+  background:#16a34a;
+  color:#fff;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:16px;
+}
 </style>
 </head>
 
@@ -85,123 +96,121 @@ footer{text-align:center;margin:40px 0 20px;color:#777;font-size:14px;}
 
 <div class="container">
 
-  <!-- LANGUAGE TOGGLE -->
-  <div class="toggle">
-    <button onclick="switchLang()">বাংলা / English</button>
+<div class="topbar">
+  <div class="progress" id="progress">Step 1 of 8</div>
+  <div class="lang">
+    <button onclick="toggleLang()">বাংলা / English</button>
   </div>
+</div>
 
-  <!-- ENGLISH -->
-  <div class="lang active" id="en">
+<!-- ENGLISH -->
+<div id="en">
 
-    <div class="hero">
-      <h1>Automate Your Business Leads with WhatsApp</h1>
-      <p>Instant replies, admin alerts & zero missed customers</p>
-    </div>
+<!-- STEP 1 -->
+<div class="step active">
+  <h1>Are You Missing Customer Leads?</h1>
+  <p class="center">Late replies = lost customers.</p>
+  <div class="center"><button class="next" onclick="nextStep()">Next</button></div>
+</div>
 
-    <div class="section">
-      <h2>Does This Happen in Your Business?</h2>
-      <ul>
-        <li>Customer submits a form but gets late reply</li>
-        <li>WhatsApp needs to be handled manually</li>
-        <li>Busy time causes missed leads</li>
-        <li>No proper follow-up system</li>
-      </ul>
-    </div>
+<!-- STEP 2 -->
+<div class="step">
+  <h2>This Is Costing You Sales</h2>
+  <ul>
+    <li>Customers don’t wait</li>
+    <li>Missed WhatsApp = missed money</li>
+    <li>No system = no follow-up</li>
+  </ul>
+  <div class="center"><button class="next" onclick="nextStep()">Next</button></div>
+</div>
 
-    <div class="section">
-      <h2>What This Automation Does</h2>
-      <div class="cards">
-        <div class="card">
-          <h3>Instant WhatsApp Reply</h3>
-          <p>Customers receive confirmation immediately.</p>
-        </div>
-        <div class="card">
-          <h3>Admin Notification</h3>
-          <p>You get WhatsApp alerts for every new lead.</p>
-        </div>
-        <div class="card">
-          <h3>Lead Storage</h3>
-          <p>All leads are saved automatically.</p>
-        </div>
-      </div>
-    </div>
+<!-- STEP 3 -->
+<div class="step">
+  <h2>A Simple Automation Can Fix This</h2>
+  <p>Instant reply + instant notification.</p>
+  <div class="center"><button class="next" onclick="nextStep()">See How</button></div>
+</div>
 
-    <div class="section">
-      <h2>Try the Live Demo</h2>
-      <div class="demo">
-        <p>Fill the form below to see the automation in action.</p>
-        <iframe src="PASTE_GOOGLE_FORM_EMBED_LINK"></iframe>
-      </div>
-    </div>
+<!-- STEP 4 -->
+<div class="step">
+  <h2>How It Works</h2>
+  <ol>
+    <li>Customer fills a form</li>
+    <li>WhatsApp reply is sent instantly</li>
+    <li>You get notified</li>
+    <li>Lead is saved automatically</li>
+  </ol>
+  <div class="center"><button class="next" onclick="nextStep()">Live Demo</button></div>
+</div>
 
-    <div class="cta">
-      <h2>Want This for Your Business?</h2>
-      <p>One-time setup • Fully customizable • Support included</p>
-    </div>
+<!-- STEP 5 -->
+<div class="step">
+  <h2>Live Demo</h2>
+  <p>Fill the form and see the automation in real time.</p>
+  <iframe src="PASTE_GOOGLE_FORM_EMBED_LINK"></iframe>
+  <div class="center"><button class="next" onclick="nextStep()">Continue</button></div>
+</div>
 
+<!-- STEP 6 -->
+<div class="step">
+  <h2>Pricing (One-Time Setup)</h2>
+  <div class="price">
+    <p>Local Business</p>
+    <strong>৳5,000 – ৳8,000</strong>
+    <p style="margin-top:10px;">Online Service / Agency</p>
+    <strong>৳10,000 – ৳15,000</strong>
   </div>
+  <div class="center"><button class="next" onclick="nextStep()">Final Step</button></div>
+</div>
 
-  <!-- BANGLA -->
-  <div class="lang" id="bn">
-
-    <div class="hero">
-      <h1>WhatsApp দিয়ে আপনার বিজনেস অটোমেট করুন</h1>
-      <p>ইন্সট্যান্ট রিপ্লাই, অ্যাডমিন নোটিফিকেশন আর কোনো লিড মিস না</p>
-    </div>
-
-    <div class="section">
-      <h2>এই সমস্যাগুলো কি আপনার বিজনেসে হচ্ছে?</h2>
-      <ul>
-        <li>ফর্ম ফিল করার পর কাস্টমার রিপ্লাই পায় না</li>
-        <li>WhatsApp হাতে হাতে সামলাতে হয়</li>
-        <li>ব্যস্ত থাকলে লিড মিস হয়</li>
-        <li>ফলো-আপ ঠিকমতো হয় না</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>এই অটোমেশন কী করে</h2>
-      <div class="cards">
-        <div class="card">
-          <h3>ইন্সট্যান্ট WhatsApp রিপ্লাই</h3>
-          <p>ফর্ম সাবমিট হলেই কাস্টমার WhatsApp মেসেজ পায়।</p>
-        </div>
-        <div class="card">
-          <h3>অ্যাডমিন নোটিফিকেশন</h3>
-          <p>নতুন লিড এলে সাথে সাথে আপনি জানবেন।</p>
-        </div>
-        <div class="card">
-          <h3>লিড সেভ</h3>
-          <p>সব ডাটা অটো সেভ হয়ে যাবে।</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>লাইভ ডেমো দেখুন</h2>
-      <div class="demo">
-        <p>এই ফর্মটি পূরণ করে নিজেই অটোমেশনটি দেখে নিন।</p>
-        <iframe src="PASTE_GOOGLE_FORM_EMBED_LINK"></iframe>
-      </div>
-    </div>
-
-    <div class="cta">
-      <h2>আপনার বিজনেসের জন্য চান?</h2>
-      <p>একবার সেটআপ • কাস্টমাইজেশন • ফুল সাপোর্ট</p>
-    </div>
-
+<!-- STEP 7 -->
+<div class="step">
+  <h2>Ready to Set This Up?</h2>
+  <p class="center">I’ll customize this automation for your business.</p>
+  <div class="center cta">
+    <a href="https://wa.me/8801XXXXXXXXX?text=Hi%20I%20want%20the%20WhatsApp%20automation%20setup">Book on WhatsApp</a>
   </div>
+</div>
 
-  <footer>
-    © 2026 — WhatsApp Automation Service
-  </footer>
+</div>
+
+<!-- BANGLA -->
+<div id="bn" style="display:none">
+
+<div class="step active">
+  <h1>আপনি কি লিড মিস করছেন?</h1>
+  <p class="center">দেরিতে রিপ্লাই = কাস্টমার হারানো।</p>
+  <div class="center"><button class="next" onclick="nextStep()">পরবর্তী</button></div>
+</div>
+
+</div>
 
 </div>
 
 <script>
-function switchLang(){
-  document.getElementById("en").classList.toggle("active");
-  document.getElementById("bn").classList.toggle("active");
+let current=0;
+let steps=document.querySelectorAll('.step');
+let progress=document.getElementById('progress');
+
+function nextStep(){
+  steps[current].classList.remove('active');
+  current++;
+  if(current<steps.length){
+    steps[current].classList.add('active');
+    progress.innerText = `Step ${current+1} of ${steps.length}`;
+  }
+}
+
+function toggleLang(){
+  const en=document.getElementById('en');
+  const bn=document.getElementById('bn');
+  if(en.style.display==='none'){
+    en.style.display='block';
+    bn.style.display='none';
+  }else{
+    en.style.display='none';
+    bn.style.display='block';
+  }
 }
 </script>
 
