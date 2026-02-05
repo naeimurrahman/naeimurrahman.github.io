@@ -15,79 +15,91 @@ body{
 .container{
   max-width:900px;
   margin:auto;
-  padding:30px 20px;
+  padding:40px 20px;
 }
-.topbar{
+.hero{
+  background:linear-gradient(135deg,#4f46e5,#06b6d4);
+  color:#fff;
+  padding:60px 30px;
+  border-radius:22px;
+  text-align:center;
+  margin-bottom:40px;
+}
+.hero h1{font-size:36px;}
+.hero p{font-size:18px;opacity:.95;}
+
+.accordion{
+  background:#fff;
+  border-radius:16px;
+  margin-bottom:15px;
+  box-shadow:0 8px 22px rgba(0,0,0,.06);
+  overflow:hidden;
+}
+.acc-header{
+  padding:22px;
+  cursor:pointer;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:20px;
 }
-.progress{
-  font-size:14px;
-  color:#555;
+.acc-header h2{
+  font-size:20px;
+  margin:0;
 }
-.lang button{
-  padding:6px 12px;
-  border:none;
-  border-radius:6px;
-  background:#4f46e5;
-  color:#fff;
-  cursor:pointer;
-  font-size:13px;
+.arrow{
+  font-size:22px;
+  transition:.3s;
 }
-
-.step{
-  display:none;
-  background:#fff;
-  padding:35px 25px;
-  border-radius:18px;
-  box-shadow:0 10px 25px rgba(0,0,0,.06);
+.acc-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+  padding:0 22px;
 }
-.step.active{display:block;}
-
-h1,h2{text-align:center;}
-p,li{font-size:18px;line-height:1.6;}
-
-button.next{
-  margin-top:30px;
-  padding:14px 24px;
-  font-size:16px;
-  background:#4f46e5;
-  color:#fff;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
+.acc-content p, 
+.acc-content li{
+  font-size:17px;
+  line-height:1.6;
 }
-.center{text-align:center;}
-
-iframe{
+.acc-content iframe{
   width:100%;
   height:600px;
   border:none;
-  margin-top:20px;
+  margin-top:15px;
 }
 
-.price{
-  background:#f1f5ff;
-  padding:20px;
-  border-radius:12px;
-  margin-top:15px;
-  text-align:center;
+.accordion.active .acc-content{
+  max-height:2000px;
+  padding-bottom:22px;
 }
-.price strong{font-size:22px;}
+.accordion.active .arrow{
+  transform:rotate(90deg);
+}
 
 .cta{
-  margin-top:25px;
+  background:#0f172a;
+  color:#fff;
+  padding:50px 25px;
+  border-radius:22px;
+  text-align:center;
+  margin-top:60px;
 }
 .cta a{
   display:inline-block;
-  padding:14px 22px;
+  margin-top:15px;
+  padding:14px 24px;
   background:#16a34a;
   color:#fff;
   border-radius:10px;
   text-decoration:none;
   font-size:16px;
+}
+
+footer{
+  text-align:center;
+  margin-top:40px;
+  color:#777;
+  font-size:14px;
 }
 </style>
 </head>
@@ -96,122 +108,104 @@ iframe{
 
 <div class="container">
 
-<div class="topbar">
-  <div class="progress" id="progress">Step 1 of 8</div>
-  <div class="lang">
-    <button onclick="toggleLang()">বাংলা / English</button>
+<!-- HERO -->
+<div class="hero">
+  <h1>WhatsApp Automation for Business</h1>
+  <p>এক ক্লিকেই বুঝবেন, কেন এই সিস্টেমটা কাজ করে</p>
+</div>
+
+<!-- ACCORDION 1 -->
+<div class="accordion">
+  <div class="acc-header">
+    <h2>❓ আপনার বিজনেসে এই সমস্যাগুলো হচ্ছে?</h2>
+    <div class="arrow">›</div>
+  </div>
+  <div class="acc-content">
+    <ul>
+      <li>কাস্টমার ফর্ম ফিল করে কিন্তু রিপ্লাই দেরিতে যায়</li>
+      <li>WhatsApp হাতে হাতে সামলাতে হয়</li>
+      <li>ব্যস্ত থাকলে লিড মিস হয়</li>
+      <li>ফলো-আপ ঠিকমতো হয় না</li>
+    </ul>
   </div>
 </div>
 
-<!-- ENGLISH -->
-<div id="en">
-
-<!-- STEP 1 -->
-<div class="step active">
-  <h1>Are You Missing Customer Leads?</h1>
-  <p class="center">Late replies = lost customers.</p>
-  <div class="center"><button class="next" onclick="nextStep()">Next</button></div>
-</div>
-
-<!-- STEP 2 -->
-<div class="step">
-  <h2>This Is Costing You Sales</h2>
-  <ul>
-    <li>Customers don’t wait</li>
-    <li>Missed WhatsApp = missed money</li>
-    <li>No system = no follow-up</li>
-  </ul>
-  <div class="center"><button class="next" onclick="nextStep()">Next</button></div>
-</div>
-
-<!-- STEP 3 -->
-<div class="step">
-  <h2>A Simple Automation Can Fix This</h2>
-  <p>Instant reply + instant notification.</p>
-  <div class="center"><button class="next" onclick="nextStep()">See How</button></div>
-</div>
-
-<!-- STEP 4 -->
-<div class="step">
-  <h2>How It Works</h2>
-  <ol>
-    <li>Customer fills a form</li>
-    <li>WhatsApp reply is sent instantly</li>
-    <li>You get notified</li>
-    <li>Lead is saved automatically</li>
-  </ol>
-  <div class="center"><button class="next" onclick="nextStep()">Live Demo</button></div>
-</div>
-
-<!-- STEP 5 -->
-<div class="step">
-  <h2>Live Demo</h2>
-  <p>Fill the form and see the automation in real time.</p>
-  <iframe src="PASTE_GOOGLE_FORM_EMBED_LINK"></iframe>
-  <div class="center"><button class="next" onclick="nextStep()">Continue</button></div>
-</div>
-
-<!-- STEP 6 -->
-<div class="step">
-  <h2>Pricing (One-Time Setup)</h2>
-  <div class="price">
-    <p>Local Business</p>
-    <strong>৳5,000 – ৳8,000</strong>
-    <p style="margin-top:10px;">Online Service / Agency</p>
-    <strong>৳10,000 – ৳15,000</strong>
+<!-- ACCORDION 2 -->
+<div class="accordion">
+  <div class="acc-header">
+    <h2>💡 এই অটোমেশন কীভাবে সমস্যার সমাধান করে</h2>
+    <div class="arrow">›</div>
   </div>
-  <div class="center"><button class="next" onclick="nextStep()">Final Step</button></div>
-</div>
-
-<!-- STEP 7 -->
-<div class="step">
-  <h2>Ready to Set This Up?</h2>
-  <p class="center">I’ll customize this automation for your business.</p>
-  <div class="center cta">
-    <a href="https://wa.me/8801XXXXXXXXX?text=Hi%20I%20want%20the%20WhatsApp%20automation%20setup">Book on WhatsApp</a>
+  <div class="acc-content">
+    <ul>
+      <li>ফর্ম সাবমিট হলেই কাস্টমার WhatsApp পায়</li>
+      <li>আপনি সাথে সাথে WhatsApp notification পান</li>
+      <li>সব লিড অটো সেভ হয়</li>
+      <li>ম্যানুয়াল কাজ প্রায় শূন্য</li>
+    </ul>
   </div>
 </div>
 
+<!-- ACCORDION 3 -->
+<div class="accordion">
+  <div class="acc-header">
+    <h2>⚙️ পুরো সিস্টেমটা কীভাবে কাজ করে</h2>
+    <div class="arrow">›</div>
+  </div>
+  <div class="acc-content">
+    <ol>
+      <li>Customer form পূরণ করে</li>
+      <li>Instant WhatsApp confirmation যায়</li>
+      <li>Admin WhatsApp alert পায়</li>
+      <li>ডাটা Google Sheet-এ জমা হয়</li>
+    </ol>
+  </div>
 </div>
 
-<!-- BANGLA -->
-<div id="bn" style="display:none">
-
-<div class="step active">
-  <h1>আপনি কি লিড মিস করছেন?</h1>
-  <p class="center">দেরিতে রিপ্লাই = কাস্টমার হারানো।</p>
-  <div class="center"><button class="next" onclick="nextStep()">পরবর্তী</button></div>
+<!-- ACCORDION 4 -->
+<div class="accordion">
+  <div class="acc-header">
+    <h2>🧪 লাইভ ডেমো (নিজে দেখে নিন)</h2>
+    <div class="arrow">›</div>
+  </div>
+  <div class="acc-content">
+    <p>এই ফর্মটি পূরণ করলে সাথে সাথে WhatsApp মেসেজ পাবেন।</p>
+    <iframe src="PASTE_GOOGLE_FORM_EMBED_LINK"></iframe>
+  </div>
 </div>
 
+<!-- ACCORDION 5 -->
+<div class="accordion">
+  <div class="acc-header">
+    <h2>💰 দাম কত & কেন ভ্যালু আছে</h2>
+    <div class="arrow">›</div>
+  </div>
+  <div class="acc-content">
+    <p><strong>Local Business:</strong> ৳5,000 – ৳8,000 (one-time)</p>
+    <p><strong>Online Service:</strong> ৳10,000 – ৳15,000 (one-time)</p>
+    <p>একটা লিড মিস হলে যতটা ক্ষতি, এই সিস্টেম তার থেকেও কম খরচ।</p>
+  </div>
 </div>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>আপনার বিজনেসের জন্য চান?</h2>
+  <p>আমি আপনার বিজনেস অনুযায়ী এই automation setup করে দেবো।</p>
+  <a href="https://wa.me/8801XXXXXXXXX?text=Hi%20I%20want%20the%20WhatsApp%20automation">Book on WhatsApp</a>
+</div>
+
+<footer>
+  © 2026 — WhatsApp Automation Service
+</footer>
 
 </div>
 
 <script>
-let current=0;
-let steps=document.querySelectorAll('.step');
-let progress=document.getElementById('progress');
-
-function nextStep(){
-  steps[current].classList.remove('active');
-  current++;
-  if(current<steps.length){
-    steps[current].classList.add('active');
-    progress.innerText = `Step ${current+1} of ${steps.length}`;
-  }
-}
-
-function toggleLang(){
-  const en=document.getElementById('en');
-  const bn=document.getElementById('bn');
-  if(en.style.display==='none'){
-    en.style.display='block';
-    bn.style.display='none';
-  }else{
-    en.style.display='none';
-    bn.style.display='block';
-  }
-}
+document.querySelectorAll('.acc-header').forEach(header=>{
+  header.addEventListener('click',()=>{
+    header.parentElement.classList.toggle('active');
+  });
+});
 </script>
 
 </body>
