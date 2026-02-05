@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>WhatsApp Automation Funnel</title>
+<title>WhatsApp Automation for Business</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+:root{
+  --primary:#4f46e5;
+  --accent:#06b6d4;
+  --dark:#0f172a;
+  --green:#16a34a;
+}
+*{box-sizing:border-box}
 body{
   margin:0;
   font-family:'Segoe UI',sans-serif;
@@ -13,30 +20,50 @@ body{
   color:#111;
 }
 .container{
-  max-width:900px;
+  max-width:920px;
   margin:auto;
-  padding:40px 20px;
+  padding:36px 18px;
+}
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+.toggle button{
+  padding:6px 12px;
+  border:none;
+  border-radius:8px;
+  background:var(--primary);
+  color:#fff;
+  cursor:pointer;
+  font-size:13px;
 }
 .hero{
-  background:linear-gradient(135deg,#4f46e5,#06b6d4);
+  background:linear-gradient(135deg,var(--primary),var(--accent));
   color:#fff;
-  padding:60px 30px;
+  padding:60px 28px;
   border-radius:22px;
   text-align:center;
-  margin-bottom:40px;
+  margin-bottom:36px;
 }
-.hero h1{font-size:36px;}
-.hero p{font-size:18px;opacity:.95;}
+.hero h1{font-size:36px;margin:0 0 10px}
+.hero p{font-size:18px;opacity:.95;margin:0}
 
 .accordion{
   background:#fff;
   border-radius:16px;
-  margin-bottom:15px;
+  margin-bottom:18px;
   box-shadow:0 8px 22px rgba(0,0,0,.06);
   overflow:hidden;
+  border-left:6px solid transparent;
+  transition:transform .2s ease;
 }
+.accordion:hover{transform:translateY(-1px)}
+.accordion.recommended{border-left-color:var(--primary)}
+
 .acc-header{
-  padding:22px;
+  padding:20px 22px;
   cursor:pointer;
   display:flex;
   justify-content:space-between;
@@ -46,6 +73,14 @@ body{
   font-size:20px;
   margin:0;
 }
+.badge{
+  background:#eef2ff;
+  color:var(--primary);
+  font-size:12px;
+  padding:4px 8px;
+  border-radius:6px;
+  margin-left:8px;
+}
 .arrow{
   font-size:22px;
   transition:.3s;
@@ -53,10 +88,10 @@ body{
 .acc-content{
   max-height:0;
   overflow:hidden;
-  transition:max-height .4s ease;
+  transition:max-height .45s ease, padding .3s ease;
   padding:0 22px;
 }
-.acc-content p, 
+.acc-content p,
 .acc-content li{
   font-size:17px;
   line-height:1.6;
@@ -65,30 +100,48 @@ body{
   width:100%;
   height:600px;
   border:none;
-  margin-top:15px;
+  margin-top:14px;
 }
 
 .accordion.active .acc-content{
-  max-height:2000px;
+  max-height:2600px;
   padding-bottom:22px;
 }
-.accordion.active .arrow{
-  transform:rotate(90deg);
+.accordion.active .arrow{transform:rotate(90deg)}
+
+.lock{
+  background:#fff7ed;
+  color:#9a3412;
+  border:1px dashed #fdba74;
+  padding:12px;
+  border-radius:10px;
+  font-size:14px;
+  margin-top:10px;
 }
 
-.cta{
-  background:#0f172a;
-  color:#fff;
-  padding:50px 25px;
-  border-radius:22px;
+.price{
+  background:#f1f5ff;
+  padding:16px;
+  border-radius:12px;
   text-align:center;
-  margin-top:60px;
+}
+.price strong{font-size:22px}
+
+.cta{
+  position:sticky;
+  bottom:12px;
+  background:var(--dark);
+  color:#fff;
+  padding:22px 18px;
+  border-radius:18px;
+  text-align:center;
+  margin-top:36px;
 }
 .cta a{
   display:inline-block;
-  margin-top:15px;
-  padding:14px 24px;
-  background:#16a34a;
+  margin-top:10px;
+  padding:14px 26px;
+  background:var(--green);
   color:#fff;
   border-radius:10px;
   text-decoration:none;
@@ -97,10 +150,13 @@ body{
 
 footer{
   text-align:center;
-  margin-top:40px;
+  margin-top:28px;
   color:#777;
   font-size:14px;
 }
+
+.lang{display:none}
+.lang.active{display:block}
 </style>
 </head>
 
@@ -108,104 +164,193 @@ footer{
 
 <div class="container">
 
-<!-- HERO -->
-<div class="hero">
-  <h1>WhatsApp Automation for Business</h1>
-  <p>এক ক্লিকেই বুঝবেন, কেন এই সিস্টেমটা কাজ করে</p>
-</div>
+  <div class="topbar">
+    <div></div>
+    <div class="toggle"><button onclick="toggleLang()">বাংলা / English</button></div>
+  </div>
 
-<!-- ACCORDION 1 -->
-<div class="accordion">
-  <div class="acc-header">
-    <h2>❓ আপনার বিজনেসে এই সমস্যাগুলো হচ্ছে?</h2>
-    <div class="arrow">›</div>
-  </div>
-  <div class="acc-content">
-    <ul>
-      <li>কাস্টমার ফর্ম ফিল করে কিন্তু রিপ্লাই দেরিতে যায়</li>
-      <li>WhatsApp হাতে হাতে সামলাতে হয়</li>
-      <li>ব্যস্ত থাকলে লিড মিস হয়</li>
-      <li>ফলো-আপ ঠিকমতো হয় না</li>
-    </ul>
-  </div>
-</div>
+  <!-- ENGLISH -->
+  <div id="en" class="lang active">
 
-<!-- ACCORDION 2 -->
-<div class="accordion">
-  <div class="acc-header">
-    <h2>💡 এই অটোমেশন কীভাবে সমস্যার সমাধান করে</h2>
-    <div class="arrow">›</div>
-  </div>
-  <div class="acc-content">
-    <ul>
-      <li>ফর্ম সাবমিট হলেই কাস্টমার WhatsApp পায়</li>
-      <li>আপনি সাথে সাথে WhatsApp notification পান</li>
-      <li>সব লিড অটো সেভ হয়</li>
-      <li>ম্যানুয়াল কাজ প্রায় শূন্য</li>
-    </ul>
-  </div>
-</div>
+    <div class="hero">
+      <h1>WhatsApp Automation for Business</h1>
+      <p>See—step by step—why this system stops missed leads</p>
+    </div>
 
-<!-- ACCORDION 3 -->
-<div class="accordion">
-  <div class="acc-header">
-    <h2>⚙️ পুরো সিস্টেমটা কীভাবে কাজ করে</h2>
-    <div class="arrow">›</div>
-  </div>
-  <div class="acc-content">
-    <ol>
-      <li>Customer form পূরণ করে</li>
-      <li>Instant WhatsApp confirmation যায়</li>
-      <li>Admin WhatsApp alert পায়</li>
-      <li>ডাটা Google Sheet-এ জমা হয়</li>
-    </ol>
-  </div>
-</div>
+    <div class="accordion active">
+      <div class="acc-header">
+        <h2>❓ Are these problems happening?</h2>
+        <div class="arrow">›</div>
+      </div>
+      <div class="acc-content">
+        <ul>
+          <li>Late replies after form submission</li>
+          <li>Manual WhatsApp handling</li>
+          <li>Busy hours = missed leads</li>
+          <li>No proper follow-up</li>
+        </ul>
+      </div>
+    </div>
 
-<!-- ACCORDION 4 -->
-<div class="accordion">
-  <div class="acc-header">
-    <h2>🧪 লাইভ ডেমো (নিজে দেখে নিন)</h2>
-    <div class="arrow">›</div>
-  </div>
-  <div class="acc-content">
-    <p>এই ফর্মটি পূরণ করলে সাথে সাথে WhatsApp মেসেজ পাবেন।</p>
-    <iframe src="PASTE_GOOGLE_FORM_EMBED_LINK"></iframe>
-  </div>
-</div>
+    <div class="accordion">
+      <div class="acc-header">
+        <h2>💡 What’s the real reason?</h2>
+        <div class="arrow">›</div>
+      </div>
+      <div class="acc-content">
+        <p>The issue isn’t you—there’s no automatic system.</p>
+        <p>Customers don’t wait. Delay = lost sale.</p>
+      </div>
+    </div>
 
-<!-- ACCORDION 5 -->
-<div class="accordion">
-  <div class="acc-header">
-    <h2>💰 দাম কত & কেন ভ্যালু আছে</h2>
-    <div class="arrow">›</div>
-  </div>
-  <div class="acc-content">
-    <p><strong>Local Business:</strong> ৳5,000 – ৳8,000 (one-time)</p>
-    <p><strong>Online Service:</strong> ৳10,000 – ৳15,000 (one-time)</p>
-    <p>একটা লিড মিস হলে যতটা ক্ষতি, এই সিস্টেম তার থেকেও কম খরচ।</p>
-  </div>
-</div>
+    <div class="accordion recommended">
+      <div class="acc-header">
+        <h2>⚙️ How the automation works <span class="badge">Recommended</span></h2>
+        <div class="arrow">›</div>
+      </div>
+      <div class="acc-content">
+        <ol>
+          <li>Customer fills the form</li>
+          <li>Instant WhatsApp confirmation</li>
+          <li>You get WhatsApp alert</li>
+          <li>Lead auto-saved to Google Sheet</li>
+        </ol>
+      </div>
+    </div>
 
-<!-- CTA -->
-<div class="cta">
-  <h2>আপনার বিজনেসের জন্য চান?</h2>
-  <p>আমি আপনার বিজনেস অনুযায়ী এই automation setup করে দেবো।</p>
-  <a href="https://wa.me/8801XXXXXXXXX?text=Hi%20I%20want%20the%20WhatsApp%20automation">Book on WhatsApp</a>
-</div>
+    <div class="accordion" id="demoAcc">
+      <div class="acc-header">
+        <h2>🧪 Live demo (try it)</h2>
+        <div class="arrow">›</div>
+      </div>
+      <div class="acc-content">
+        <p>Submit the form and receive WhatsApp instantly.</p>
+        <iframe src="PASTE_GOOGLE_FORM_EMBED_LINK"></iframe>
+      </div>
+    </div>
 
-<footer>
-  © 2026 — WhatsApp Automation Service
-</footer>
+    <div class="accordion" id="priceAcc">
+      <div class="acc-header">
+        <h2>💰 Pricing & value</h2>
+        <div class="arrow">›</div>
+      </div>
+      <div class="acc-content">
+        <div id="priceLock" class="lock">
+          🔒 Please try the live demo first to unlock pricing.
+        </div>
+        <div id="priceBox" class="price" style="display:none">
+          <p>Local Business</p>
+          <strong>৳5,000 – ৳8,000</strong>
+          <p style="margin-top:8px">Online Service / Agency</p>
+          <strong>৳10,000 – ৳15,000</strong>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BANGLA -->
+  <div id="bn" class="lang">
+
+    <div class="hero">
+      <h1>WhatsApp Automation for Business</h1>
+      <p>ধাপে ধাপে দেখুন—কেন এই সিস্টেমটা কাজ করে</p>
+    </div>
+
+    <div class="accordion active">
+      <div class="acc-header">
+        <h2>❓ এই সমস্যাগুলো কি হচ্ছে?</h2>
+        <div class="arrow">›</div>
+      </div>
+      <div class="acc-content">
+        <ul>
+          <li>ফর্ম ফিলের পর দেরিতে রিপ্লাই</li>
+          <li>WhatsApp হাতে হাতে সামলানো</li>
+          <li>ব্যস্ততায় লিড মিস</li>
+          <li>ফলো-আপের অভাব</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion recommended">
+      <div class="acc-header">
+        <h2>⚙️ সিস্টেমটা কীভাবে কাজ করে <span class="badge">Recommended</span></h2>
+        <div class="arrow">›</div>
+      </div>
+      <div class="acc-content">
+        <ol>
+          <li>ফর্ম সাবমিট</li>
+          <li>ইন্সট্যান্ট WhatsApp</li>
+          <li>আপনি নোটিফিকেশন পান</li>
+          <li>লিড অটো সেভ</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="accordion" id="demoAccBn">
+      <div class="acc-header">
+        <h2>🧪 লাইভ ডেমো</h2>
+        <div class="arrow">›</div>
+      </div>
+      <div class="acc-content">
+        <p>ফর্মটি পূরণ করে সাথে সাথে WhatsApp পান।</p>
+        <iframe src="PASTE_GOOGLE_FORM_EMBED_LINK"></iframe>
+      </div>
+    </div>
+
+    <div class="accordion" id="priceAccBn">
+      <div class="acc-header">
+        <h2>💰 দাম ও ভ্যালু</h2>
+        <div class="arrow">›</div>
+      </div>
+      <div class="acc-content">
+        <div id="priceLockBn" class="lock">
+          🔒 আগে লাইভ ডেমো দেখুন।
+        </div>
+        <div id="priceBoxBn" class="price" style="display:none">
+          <p>Local Business</p>
+          <strong>৳5,000 – ৳8,000</strong>
+          <p style="margin-top:8px">Online Service</p>
+          <strong>৳10,000 – ৳15,000</strong>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cta">
+    <h2>Ready to set this up?</h2>
+    <p>One-time setup • Customization • Full support</p>
+    <a href="https://wa.me/8801XXXXXXXXX?text=Hi%20I%20want%20the%20WhatsApp%20automation">Book on WhatsApp</a>
+  </div>
+
+  <footer>© 2026 — WhatsApp Automation Service</footer>
 
 </div>
 
 <script>
-document.querySelectorAll('.acc-header').forEach(header=>{
-  header.addEventListener('click',()=>{
-    header.parentElement.classList.toggle('active');
+/* accordion behavior */
+const accs=document.querySelectorAll('.accordion');
+accs.forEach(acc=>{
+  acc.querySelector('.acc-header').addEventListener('click',()=>{
+    accs.forEach(a=>{ if(a!==acc) a.classList.remove('active'); });
+    acc.classList.toggle('active');
+    acc.scrollIntoView({behavior:'smooth',block:'start'});
+    // unlock pricing if demo opened
+    if(acc.id==='demoAcc'){
+      document.getElementById('priceLock').style.display='none';
+      document.getElementById('priceBox').style.display='block';
+    }
+    if(acc.id==='demoAccBn'){
+      document.getElementById('priceLockBn').style.display='none';
+      document.getElementById('priceBoxBn').style.display='block';
+    }
   });
 });
+function toggleLang(){
+  document.getElementById('en').classList.toggle('active');
+  document.getElementById('bn').classList.toggle('active');
+}
 </script>
 
 </body>
