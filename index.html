@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>WhatsApp Automation Service</title>
+<title>WhatsApp Automation for Business | Auto Reply & Lead Save</title>
+<meta name="description" content="Automate WhatsApp replies using Google Forms. One-time setup. No monthly fee. Perfect for local & online businesses.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,6 +26,7 @@ body{
   font-family:'Inter',system-ui,sans-serif;
   background:var(--bg);
   color:var(--text);
+  padding-bottom:120px; /* CTA safe space */
 }
 
 .container{
@@ -129,8 +131,11 @@ body{
 }
 .demo iframe{
   width:100%;
-  height:650px;
+  height:600px;
   border:none;
+}
+@media (max-width:600px){
+  .demo iframe{height:520px;}
 }
 
 /* PRICE */
@@ -188,8 +193,10 @@ footer{
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <div class="brand">Automation Service</div>
-  <button class="toggle" onclick="toggleLang()">বাংলা / English</button>
+  <div class="brand">WhatsApp Automation</div>
+  <button class="toggle" onclick="toggleLang()" aria-label="Toggle language">
+    বাংলা / English
+  </button>
 </div>
 
 <!-- ================= ENGLISH ================= -->
@@ -198,16 +205,16 @@ footer{
 <div class="hero">
   <h1>Stop Missing WhatsApp Leads</h1>
   <p>
-    Automatically reply to customers, get admin alerts,  
+    Automatically reply to customers, notify admins,  
     and save every lead — without manual work.
   </p>
 
   <div class="trust">
-    ✓ Uses Google Forms & WhatsApp • One-time setup • No monthly fee
+    ✓ Google Forms + WhatsApp • One-time setup • No monthly fee
   </div>
 
   <div class="scarcity">
-    ⏳ Limited weekly slots — each setup is done manually.
+    ⏳ Limited weekly slots — manual setup only.
   </div>
 </div>
 
@@ -215,28 +222,25 @@ footer{
   <h2>What You Get</h2>
   <ul class="benefits">
     <li>Instant WhatsApp auto-reply</li>
-    <li>Admin notification for every lead</li>
-    <li>Automatic lead saving</li>
+    <li>Admin alert for every lead</li>
+    <li>Automatic Google Sheet saving</li>
     <li>No follow-up stress</li>
-    <li>Works for local & online business</li>
+    <li>Perfect for local & online business</li>
   </ul>
 </div>
 
 <div class="section">
   <h2>How It Works</h2>
   <div class="structure">
-    <p><strong>Flow:</strong> Form → WhatsApp → Admin → Google Sheet</p>
+    <p><strong>Flow:</strong> Google Form → WhatsApp → Admin → Google Sheet</p>
   </div>
 </div>
 
 <div class="section">
   <h2>Live Demo</h2>
-  <p>Fill the form and receive WhatsApp instantly.</p>
+  <p>Submit the form and receive WhatsApp instantly.</p>
   <div class="demo">
-    <iframe 
-      src="https://docs.google.com/forms/d/e/1FAIpQLSdqguWDHkKzGd86u6YCz0t17mC1UhvcNj9w5EeOq1MR_rS7KA/viewform?embedded=true"
-      loading="lazy">
-    </iframe>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdqguWDHkKzGd86u6YCz0t17mC1UhvcNj9w5EeOq1MR_rS7KA/viewform?embedded=true" loading="lazy"></iframe>
   </div>
 </div>
 
@@ -263,11 +267,11 @@ footer{
   </p>
 
   <div class="trust">
-    ✓ Google Form ও WhatsApp ব্যবহার • একবার সেটআপ • মাসিক ফি নেই
+    ✓ Google Form + WhatsApp • একবার সেটআপ • মাসিক ফি নেই
   </div>
 
   <div class="scarcity">
-    ⏳ প্রতি সপ্তাহে সীমিত সেটআপ নেওয়া হয়।
+    ⏳ প্রতি সপ্তাহে সীমিত সংখ্যক সেটআপ।
   </div>
 </div>
 
@@ -275,8 +279,8 @@ footer{
   <h2>এই অটোমেশন দিয়ে যা পাবেন</h2>
   <ul class="benefits">
     <li>সাথে সাথে WhatsApp রিপ্লাই</li>
-    <li>প্রতিটি লিডের নোটিফিকেশন</li>
-    <li>অটো লিড সেভ</li>
+    <li>প্রতিটি লিডে নোটিফিকেশন</li>
+    <li>অটো Google Sheet লিড সেভ</li>
     <li>ম্যানুয়াল ঝামেলা নেই</li>
     <li>লোকাল ও অনলাইন বিজনেসে কাজ করে</li>
   </ul>
@@ -284,12 +288,9 @@ footer{
 
 <div class="section">
   <h2>লাইভ ডেমো</h2>
-  <p>ফর্ম পূরণ করলে সাথে সাথে WhatsApp পাবেন।</p>
+  <p>ফর্ম পূরণ করলেই WhatsApp পাবেন।</p>
   <div class="demo">
-    <iframe 
-      src="https://docs.google.com/forms/d/e/1FAIpQLSdqguWDHkKzGd86u6YCz0t17mC1UhvcNj9w5EeOq1MR_rS7KA/viewform?embedded=true"
-      loading="lazy">
-    </iframe>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdqguWDHkKzGd86u6YCz0t17mC1UhvcNj9w5EeOq1MR_rS7KA/viewform?embedded=true" loading="lazy"></iframe>
   </div>
 </div>
 
@@ -321,8 +322,24 @@ footer{
 
 <script>
 function toggleLang(){
-  document.getElementById('en').classList.toggle('active');
-  document.getElementById('bn').classList.toggle('active');
+  const en = document.getElementById('en');
+  const bn = document.getElementById('bn');
+
+  en.classList.toggle('active');
+  bn.classList.toggle('active');
+
+  localStorage.setItem(
+    'lang',
+    en.classList.contains('active') ? 'en' : 'bn'
+  );
+}
+
+window.onload = () => {
+  const lang = localStorage.getItem('lang');
+  if(lang === 'bn'){
+    document.getElementById('en').classList.remove('active');
+    document.getElementById('bn').classList.add('active');
+  }
 }
 </script>
 
