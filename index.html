@@ -2,81 +2,93 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>WhatsApp Automation for Business</title>
+<title>WhatsApp Automation Service</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --blue:#2563eb;
-  --green:#16a34a;
-  --purple:#7c3aed;
+  --primary:#22c55e;
+  --primary-dark:#16a34a;
   --text:#0f172a;
   --muted:#475569;
   --border:#e5e7eb;
-  --bg:#f8fafc;
+  --bg:#ffffff;
+  --soft:#f0fdf4;
 }
+
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:'Inter',system-ui,sans-serif;
-  background:linear-gradient(180deg,#f8fafc,#eef2ff);
+  background:var(--bg);
   color:var(--text);
 }
+
 .container{
   max-width:960px;
   margin:auto;
-  padding:42px 18px;
+  padding:36px 18px;
 }
 
 /* TOP BAR */
 .topbar{
   display:flex;
-  justify-content:flex-end;
-  margin-bottom:18px;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
 }
-.topbar button{
-  padding:8px 14px;
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(135deg,var(--purple),var(--blue));
-  color:#fff;
-  font-size:14px;
+.brand{
+  font-weight:700;
+  font-size:18px;
+}
+.toggle{
+  padding:6px 12px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:#fff;
   cursor:pointer;
+  font-size:14px;
 }
 
 /* HERO */
 .hero{
-  background:linear-gradient(135deg,#ffffff,#eef2ff);
+  background:var(--soft);
   border:1px solid var(--border);
-  border-radius:28px;
-  padding:78px 38px;
+  border-radius:20px;
+  padding:64px 36px;
 }
 .hero h1{
-  font-size:44px;
-  line-height:1.15;
-  margin:0 0 16px;
+  font-size:40px;
+  line-height:1.2;
+  margin:0 0 12px;
 }
 .hero p{
-  font-size:19px;
+  font-size:18px;
   color:var(--muted);
-  max-width:680px;
+  max-width:720px;
+}
+.trust{
+  margin-top:14px;
+  font-size:15px;
+  color:#166534;
 }
 
 /* SCARCITY */
 .scarcity{
-  margin-top:22px;
-  padding:14px 18px;
-  background:linear-gradient(135deg,#ecfeff,#f0fdf4);
-  border-left:5px solid var(--green);
-  border-radius:14px;
+  margin-top:18px;
+  padding:12px 16px;
+  background:#dcfce7;
+  border-left:4px solid var(--primary);
+  border-radius:10px;
   font-size:15px;
 }
 
 /* SECTION */
 .section{
-  margin-top:64px;
+  margin-top:56px;
 }
 .section h2{
   font-size:28px;
@@ -85,105 +97,88 @@ body{
 .section p{
   font-size:17px;
   color:var(--muted);
-  max-width:720px;
+  max-width:760px;
 }
 
 /* BENEFITS */
 .benefits li{
   list-style:none;
-  margin-bottom:14px;
-  font-size:18px;
+  margin-bottom:12px;
+  font-size:17px;
 }
 .benefits li::before{
-  content:"✔";
-  color:var(--green);
+  content:"✓";
+  color:var(--primary-dark);
   font-weight:700;
   margin-right:10px;
 }
 
 /* STRUCTURE */
 .structure{
-  background:#ffffff;
   border:1px solid var(--border);
-  border-radius:22px;
-  padding:28px;
-}
-.structure img{
-  width:100%;
   border-radius:16px;
-  margin-top:14px;
-}
-
-/* PROOF */
-.proof{
-  background:linear-gradient(135deg,#ffffff,#f8fafc);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:28px;
+  padding:22px;
+  background:#fff;
 }
 
 /* DEMO */
 .demo{
-  border-radius:24px;
-  padding:26px;
-  background:linear-gradient(135deg,#eef2ff,#ffffff);
-  border:2px solid var(--blue);
+  border:2px solid var(--primary);
+  border-radius:16px;
+  padding:22px;
 }
 .demo iframe{
   width:100%;
-  height:600px;
+  height:650px;
   border:none;
-  margin-top:14px;
-  border-radius:14px;
 }
 
 /* PRICE */
 .price{
-  background:linear-gradient(135deg,#f0fdf4,#ecfeff);
-  border-radius:22px;
-  padding:28px;
+  background:#f0fdf4;
+  border-radius:16px;
+  padding:22px;
   text-align:center;
 }
 .price strong{
-  font-size:26px;
-  color:var(--green);
+  font-size:24px;
+  color:var(--primary-dark);
 }
 
 /* CTA */
 .cta{
   position:sticky;
-  bottom:14px;
-  background:linear-gradient(135deg,#ffffff,#eef2ff);
+  bottom:12px;
+  background:#ffffff;
   border:1px solid var(--border);
-  border-radius:24px;
-  padding:28px;
-  margin-top:64px;
-}
-.cta h2{
-  font-size:24px;
-}
-.cta p{
-  color:var(--muted);
+  border-radius:18px;
+  padding:22px;
+  margin-top:56px;
 }
 .cta a{
   display:inline-block;
-  margin-top:16px;
-  padding:16px 36px;
-  background:linear-gradient(135deg,var(--blue),var(--purple));
+  margin-top:12px;
+  padding:14px 28px;
+  background:var(--primary);
   color:#fff;
-  border-radius:14px;
+  border-radius:10px;
   text-decoration:none;
-  font-size:17px;
-  box-shadow:0 14px 34px rgba(37,99,235,.35);
+  font-size:16px;
+}
+.cta a:hover{
+  background:var(--primary-dark);
 }
 
 /* FOOTER */
 footer{
   text-align:center;
-  margin:42px 0 14px;
+  margin:36px 0 12px;
   color:#64748b;
   font-size:14px;
 }
+
+.lang{display:none}
+.lang.active{display:block}
 </style>
 </head>
 
@@ -191,84 +186,128 @@ footer{
 
 <div class="container">
 
-<!-- HERO -->
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="brand">Automation Service</div>
+  <button class="toggle" onclick="toggleLang()">বাংলা / English</button>
+</div>
+
+<!-- ================= ENGLISH ================= -->
+<div id="en" class="lang active">
+
 <div class="hero">
-  <h1>Automate WhatsApp Leads.<br>Once. Properly.</h1>
+  <h1>Stop Missing WhatsApp Leads</h1>
   <p>
-    A clean automation system that replies instantly,  
-    notifies you, and saves every lead without manual work.
+    Automatically reply to customers, get admin alerts,  
+    and save every lead — without manual work.
   </p>
 
+  <div class="trust">
+    ✓ Uses Google Forms & WhatsApp • One-time setup • No monthly fee
+  </div>
+
   <div class="scarcity">
-    ⏳ <strong>Limited weekly slots:</strong>  
-    Each setup is custom-built manually for quality.
+    ⏳ Limited weekly slots — each setup is done manually.
   </div>
 </div>
 
-<!-- BENEFITS -->
 <div class="section">
-  <h2>What This Automation Gives You</h2>
+  <h2>What You Get</h2>
   <ul class="benefits">
     <li>Instant WhatsApp auto-reply</li>
     <li>Admin notification for every lead</li>
+    <li>Automatic lead saving</li>
     <li>No follow-up stress</li>
     <li>Works for local & online business</li>
-    <li>One-time setup only</li>
   </ul>
 </div>
 
-<!-- STRUCTURE -->
 <div class="section">
-  <h2>How the Automation Works (Simple View)</h2>
-  <p>
-    This system follows a very simple flow.  
-    No complex software. No extra tools.
-  </p>
-
+  <h2>How It Works</h2>
   <div class="structure">
-    <p><strong>Flow:</strong> Form → WhatsApp → You → Sheet</p>
-    <!-- Replace the image link below with your chosen diagram -->
-    <img src="https://i.imgur.com/4M34hi2.png" alt="WhatsApp Automation Flow Diagram">
+    <p><strong>Flow:</strong> Form → WhatsApp → Admin → Google Sheet</p>
   </div>
 </div>
 
-<!-- PROOF -->
-<div class="section">
-  <h2>Why This System Is Reliable</h2>
-  <div class="proof">
-    <p>✔ Built using Google Forms & WhatsApp</p>
-    <p>✔ No new app to learn</p>
-    <p>✔ Used in real business workflows</p>
-    <p>✔ Easy to customize anytime</p>
-  </div>
-</div>
-
-<!-- DEMO -->
 <div class="section">
   <h2>Live Demo</h2>
   <p>Fill the form and receive WhatsApp instantly.</p>
   <div class="demo">
-    <iframe src="PASTE_GOOGLE_FORM_EMBED_LINK"></iframe>
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLSfZjaGsnM4J7cwQbS7WVZE4nH22fnzV6Xl3j9sXhVJeTVeHvg/viewform?embedded=true">
+    </iframe>
   </div>
 </div>
 
-<!-- PRICE -->
 <div class="section">
   <h2>One-Time Pricing</h2>
   <div class="price">
     <p>Local Business</p>
     <strong>৳5,000 – ৳8,000</strong>
-    <p style="margin-top:12px">Online / Agency</p>
+    <p style="margin-top:10px">Online / Agency</p>
     <strong>৳10,000 – ৳15,000</strong>
   </div>
 </div>
 
+</div>
+
+<!-- ================= BANGLA ================= -->
+<div id="bn" class="lang">
+
+<div class="hero">
+  <h1>WhatsApp লিড আর মিস করবেন না</h1>
+  <p>
+    ফর্ম সাবমিট হলেই অটো WhatsApp রিপ্লাই,  
+    নোটিফিকেশন ও লিড সেভ — সব নিজে নিজে।
+  </p>
+
+  <div class="trust">
+    ✓ Google Form ও WhatsApp ব্যবহার • একবার সেটআপ • মাসিক ফি নেই
+  </div>
+
+  <div class="scarcity">
+    ⏳ প্রতি সপ্তাহে সীমিত সেটআপ নেওয়া হয়।
+  </div>
+</div>
+
+<div class="section">
+  <h2>এই অটোমেশন দিয়ে যা পাবেন</h2>
+  <ul class="benefits">
+    <li>সাথে সাথে WhatsApp রিপ্লাই</li>
+    <li>প্রতিটি লিডের নোটিফিকেশন</li>
+    <li>অটো লিড সেভ</li>
+    <li>ম্যানুয়াল ঝামেলা নেই</li>
+    <li>লোকাল ও অনলাইন বিজনেসে কাজ করে</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>লাইভ ডেমো</h2>
+  <p>ফর্ম পূরণ করলে সাথে সাথে WhatsApp পাবেন।</p>
+  <div class="demo">
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLSfZjaGsnM4J7cwQbS7WVZE4nH22fnzV6Xl3j9sXhVJeTVeHvg/viewform?embedded=true">
+    </iframe>
+  </div>
+</div>
+
+<div class="section">
+  <h2>এককালীন মূল্য</h2>
+  <div class="price">
+    <p>Local Business</p>
+    <strong>৳5,000 – ৳8,000</strong>
+    <p style="margin-top:10px">Online / Agency</p>
+    <strong>৳10,000 – ৳15,000</strong>
+  </div>
+</div>
+
+</div>
+
 <!-- CTA -->
 <div class="cta">
-  <h2>Ready to Set This Up?</h2>
-  <p>Clean setup • No monthly fee • Full support</p>
+  <h2>Ready to Automate?</h2>
   <a href="https://wa.me/8801XXXXXXXXX?text=Hi%20I%20want%20the%20WhatsApp%20automation">
-    Book on WhatsApp
+    WhatsApp-এ কথা বলুন
   </a>
 </div>
 
@@ -277,6 +316,13 @@ footer{
 </footer>
 
 </div>
+
+<script>
+function toggleLang(){
+  document.getElementById('en').classList.toggle('active');
+  document.getElementById('bn').classList.toggle('active');
+}
+</script>
 
 </body>
 </html>
