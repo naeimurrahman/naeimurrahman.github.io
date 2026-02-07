@@ -2,344 +2,201 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>WhatsApp Automation for Business | Auto Reply & Lead Save</title>
-<meta name="description" content="Automate WhatsApp replies using Google Forms. One-time setup. No monthly fee. Perfect for local & online businesses.">
+<title>Smart’s Automation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-:root{
-  --primary:#22c55e;
-  --primary-dark:#16a34a;
-  --text:#0f172a;
-  --muted:#475569;
-  --border:#e5e7eb;
-  --bg:#ffffff;
-  --soft:#f0fdf4;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f8fafc;color:#0f172a}
 
-*{box-sizing:border-box}
+.container{max-width:420px;margin:40px auto;padding:20px}
+h1{text-align:center;margin-bottom:6px}
+p{text-align:center;color:#64748b;margin-bottom:18px}
 
-body{
-  margin:0;
-  font-family:'Inter',system-ui,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  padding-bottom:120px; /* CTA safe space */
-}
-
-.container{
-  max-width:960px;
-  margin:auto;
-  padding:36px 18px;
-}
-
-/* TOP BAR */
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:24px;
-}
-.brand{
-  font-weight:700;
-  font-size:18px;
-}
-.toggle{
-  padding:6px 12px;
-  border-radius:8px;
-  border:1px solid var(--border);
+.card{
   background:#fff;
-  cursor:pointer;
-  font-size:14px;
-}
-
-/* HERO */
-.hero{
-  background:var(--soft);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:64px 36px;
-}
-.hero h1{
-  font-size:40px;
-  line-height:1.2;
-  margin:0 0 12px;
-}
-.hero p{
-  font-size:18px;
-  color:var(--muted);
-  max-width:720px;
-}
-.trust{
-  margin-top:14px;
-  font-size:15px;
-  color:#166534;
-}
-
-/* SCARCITY */
-.scarcity{
-  margin-top:18px;
-  padding:12px 16px;
-  background:#dcfce7;
-  border-left:4px solid var(--primary);
-  border-radius:10px;
-  font-size:15px;
-}
-
-/* SECTION */
-.section{
-  margin-top:56px;
-}
-.section h2{
-  font-size:28px;
-  margin-bottom:14px;
-}
-.section p{
-  font-size:17px;
-  color:var(--muted);
-  max-width:760px;
-}
-
-/* BENEFITS */
-.benefits li{
-  list-style:none;
-  margin-bottom:12px;
-  font-size:17px;
-}
-.benefits li::before{
-  content:"✓";
-  color:var(--primary-dark);
-  font-weight:700;
-  margin-right:10px;
-}
-
-/* STRUCTURE */
-.structure{
-  border:1px solid var(--border);
-  border-radius:16px;
   padding:22px;
-  background:#fff;
+  border-radius:18px;
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+  animation:pop .5s ease;
+}
+@keyframes pop{
+  from{opacity:0;transform:scale(.96) translateY(20px)}
+  to{opacity:1;transform:none}
 }
 
-/* DEMO */
-.demo{
-  border:2px solid var(--primary);
-  border-radius:16px;
-  padding:22px;
-}
-.demo iframe{
+input,textarea,button{
   width:100%;
-  height:600px;
+  padding:14px;
+  margin-bottom:12px;
+  border-radius:10px;
+  border:1px solid #e5e7eb;
+  font-size:15px;
+}
+
+button{
+  background:#25D366;
+  color:#fff;
+  font-weight:600;
   border:none;
 }
-@media (max-width:600px){
-  .demo iframe{height:520px;}
+button.loading{
+  opacity:.7;
+  pointer-events:none;
 }
 
-/* PRICE */
-.price{
-  background:#f0fdf4;
-  border-radius:16px;
-  padding:22px;
-  text-align:center;
-}
-.price strong{
-  font-size:24px;
-  color:var(--primary-dark);
-}
+/* phone */
+.phone-row{display:flex;gap:8px;position:relative}
+#country{width:45%}
+#number{width:55%}
 
-/* CTA */
-.cta{
-  position:sticky;
-  bottom:12px;
-  background:#ffffff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:22px;
-  margin-top:56px;
-}
-.cta a{
-  display:inline-block;
-  margin-top:12px;
-  padding:14px 28px;
-  background:var(--primary);
-  color:#fff;
+/* dropdown */
+#list{
+  position:absolute;
+  top:54px;
+  left:0;
+  width:45%;
+  max-height:220px;
+  overflow-y:auto;
+  background:#fff;
+  border:1px solid #e5e7eb;
   border-radius:10px;
-  text-decoration:none;
-  font-size:16px;
+  display:none;
+  z-index:9999;
 }
-.cta a:hover{
-  background:var(--primary-dark);
-}
+.item{padding:10px;font-size:14px;cursor:pointer}
+.item:hover{background:#f1f5f9}
 
-/* FOOTER */
-footer{
+/* modal */
+#modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+.modal-box{
+  background:#fff;
+  padding:26px;
+  border-radius:18px;
+  width:90%;
+  max-width:340px;
   text-align:center;
-  margin:36px 0 12px;
-  color:#64748b;
-  font-size:14px;
+  animation:pop .4s ease;
 }
-
-.lang{display:none}
-.lang.active{display:block}
+.modal-box p{margin:10px 0}
+.modal-box a{
+  display:block;
+  background:#25D366;
+  color:#fff;
+  padding:12px;
+  border-radius:10px;
+  margin-top:8px;
+  text-decoration:none;
+}
+.modal-box button{
+  background:#e5e7eb;
+  color:#111;
+  margin-top:10px;
+}
 </style>
 </head>
-
 <body>
 
 <div class="container">
+  <h1>Smart’s Automation</h1>
+  <p>WhatsApp Automation Setup</p>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="brand">WhatsApp Automation</div>
-  <button class="toggle" onclick="toggleLang()" aria-label="Toggle language">
-    বাংলা / English
-  </button>
-</div>
+  <div class="card">
+    <form id="leadForm"
+      action="https://script.google.com/macros/s/AKfycbybXjHhyl-VKrUtVWDnejbUjpEgP6iUBzSF1eLPtqYchXyMmgjqYfey15pgQcUS6TKb/exec"
+      method="POST"
+      target="hidden">
 
-<!-- ================= ENGLISH ================= -->
-<div id="en" class="lang active">
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="text" name="name" placeholder="Full Name" required>
 
-<div class="hero">
-  <h1>Stop Missing WhatsApp Leads</h1>
-  <p>
-    Automatically reply to customers, notify admins,  
-    and save every lead — without manual work.
-  </p>
+      <div class="phone-row">
+        <input id="country" name="country_code" placeholder="+880 Bangladesh">
+        <input id="number" name="whatsapp" placeholder="WhatsApp Number" required>
+        <div id="list"></div>
+      </div>
 
-  <div class="trust">
-    ✓ Google Forms + WhatsApp • One-time setup • No monthly fee
-  </div>
+      <input type="text" name="business" placeholder="Business Type" required>
+      <textarea name="message" placeholder="Message / Requirement"></textarea>
 
-  <div class="scarcity">
-    ⏳ Limited weekly slots — manual setup only.
-  </div>
-</div>
-
-<div class="section">
-  <h2>What You Get</h2>
-  <ul class="benefits">
-    <li>Instant WhatsApp auto-reply</li>
-    <li>Admin alert for every lead</li>
-    <li>Automatic Google Sheet saving</li>
-    <li>No follow-up stress</li>
-    <li>Perfect for local & online business</li>
-  </ul>
-</div>
-
-<div class="section">
-  <h2>How It Works</h2>
-  <div class="structure">
-    <p><strong>Flow:</strong> Google Form → WhatsApp → Admin → Google Sheet</p>
+      <button id="btn" type="submit">Submit Request</button>
+    </form>
+    <iframe name="hidden" style="display:none"></iframe>
   </div>
 </div>
 
-<div class="section">
-  <h2>Live Demo</h2>
-  <p>Submit the form and receive WhatsApp instantly.</p>
-  <div class="demo">
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdqguWDHkKzGd86u6YCz0t17mC1UhvcNj9w5EeOq1MR_rS7KA/viewform?embedded=true" loading="lazy"></iframe>
+<!-- THANK YOU MODAL -->
+<div id="modal">
+  <div class="modal-box">
+    <h3>🎉 Thank You!</h3>
+    <p>Your request has been received.</p>
+
+    <p style="font-size:14px;color:#64748b">
+      If you want, type or grab it 👇
+    </p>
+
+    <a href="https://wa.me/8801742313132" target="_blank">
+      💬 Contact on WhatsApp
+    </a>
+
+    <button onclick="closeModal()">Close</button>
   </div>
-</div>
-
-<div class="section">
-  <h2>One-Time Pricing</h2>
-  <div class="price">
-    <p>Local Business</p>
-    <strong>৳5,000 – ৳8,000</strong>
-    <p style="margin-top:10px">Online / Agency</p>
-    <strong>৳10,000 – ৳15,000</strong>
-  </div>
-</div>
-
-</div>
-
-<!-- ================= BANGLA ================= -->
-<div id="bn" class="lang">
-
-<div class="hero">
-  <h1>WhatsApp লিড আর মিস করবেন না</h1>
-  <p>
-    ফর্ম সাবমিট হলেই অটো WhatsApp রিপ্লাই,  
-    নোটিফিকেশন ও লিড সেভ — সব নিজে নিজে।
-  </p>
-
-  <div class="trust">
-    ✓ Google Form + WhatsApp • একবার সেটআপ • মাসিক ফি নেই
-  </div>
-
-  <div class="scarcity">
-    ⏳ প্রতি সপ্তাহে সীমিত সংখ্যক সেটআপ।
-  </div>
-</div>
-
-<div class="section">
-  <h2>এই অটোমেশন দিয়ে যা পাবেন</h2>
-  <ul class="benefits">
-    <li>সাথে সাথে WhatsApp রিপ্লাই</li>
-    <li>প্রতিটি লিডে নোটিফিকেশন</li>
-    <li>অটো Google Sheet লিড সেভ</li>
-    <li>ম্যানুয়াল ঝামেলা নেই</li>
-    <li>লোকাল ও অনলাইন বিজনেসে কাজ করে</li>
-  </ul>
-</div>
-
-<div class="section">
-  <h2>লাইভ ডেমো</h2>
-  <p>ফর্ম পূরণ করলেই WhatsApp পাবেন।</p>
-  <div class="demo">
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdqguWDHkKzGd86u6YCz0t17mC1UhvcNj9w5EeOq1MR_rS7KA/viewform?embedded=true" loading="lazy"></iframe>
-  </div>
-</div>
-
-<div class="section">
-  <h2>এককালীন মূল্য</h2>
-  <div class="price">
-    <p>Local Business</p>
-    <strong>৳5,000 – ৳8,000</strong>
-    <p style="margin-top:10px">Online / Agency</p>
-    <strong>৳10,000 – ৳15,000</strong>
-  </div>
-</div>
-
-</div>
-
-<!-- CTA -->
-<div class="cta">
-  <h2>Ready to Automate?</h2>
-  <a href="https://wa.me/8801742313132?text=Hi%20I%20want%20the%20WhatsApp%20automation">
-    WhatsApp-এ কথা বলুন
-  </a>
-</div>
-
-<footer>
-  © 2026 — WhatsApp Automation Service
-</footer>
-
 </div>
 
 <script>
-function toggleLang(){
-  const en = document.getElementById('en');
-  const bn = document.getElementById('bn');
+/* COUNTRY LIST (stable) */
+const countries=[
+["+880","Bangladesh"],["+91","India"],["+1","USA"],["+44","UK"],
+["+971","UAE"],["+92","Pakistan"],["+61","Australia"]
+];
 
-  en.classList.toggle('active');
-  bn.classList.toggle('active');
+const country=document.getElementById("country");
+const list=document.getElementById("list");
 
-  localStorage.setItem(
-    'lang',
-    en.classList.contains('active') ? 'en' : 'bn'
-  );
+function show(q=""){
+  list.innerHTML="";
+  countries.filter(c =>
+    c[0].includes(q) || c[1].toLowerCase().includes(q.toLowerCase())
+  ).forEach(c=>{
+    const d=document.createElement("div");
+    d.className="item";
+    d.textContent=`${c[0]} ${c[1]}`;
+    d.onclick=()=>{
+      country.value=`${c[0]} ${c[1]}`;
+      list.style.display="none";
+    };
+    list.appendChild(d);
+  });
+  list.style.display="block";
 }
+country.addEventListener("focus",()=>show());
+country.addEventListener("input",e=>show(e.target.value));
 
-window.onload = () => {
-  const lang = localStorage.getItem('lang');
-  if(lang === 'bn'){
-    document.getElementById('en').classList.remove('active');
-    document.getElementById('bn').classList.add('active');
-  }
+/* default */
+if(country.value==="") country.value="+880 Bangladesh";
+
+/* submit UX */
+const form=document.getElementById("leadForm");
+const btn=document.getElementById("btn");
+form.addEventListener("submit",()=>{
+  btn.classList.add("loading");
+  btn.innerText="Submitting...";
+  setTimeout(()=>{
+    document.getElementById("modal").style.display="flex";
+    form.reset();
+    btn.classList.remove("loading");
+    btn.innerText="Submit Request";
+  },800);
+});
+function closeModal(){
+  document.getElementById("modal").style.display="none";
 }
 </script>
 
