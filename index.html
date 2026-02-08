@@ -250,10 +250,122 @@ section{padding:70px 0}
         </div>
 
       </form>
+
       <iframe name="hiddenFrame" style="display:none"></iframe>
+
     </div>
+
+    <!-- CONFIRMATION PAGE -->
+    <div id="confirmationPage" class="confirm-wrap" style="display:none;">
+      <div class="confirm-box">
+        <div class="checkmark">✔</div>
+
+        <h2>Request Submitted Successfully!</h2>
+        <p>
+          Thank you for contacting <b>Smart’s Automation</b>.<br>
+          Our team will contact you shortly via WhatsApp.
+        </p>
+
+        <div class="note">
+          If you entered an incorrect WhatsApp number,
+          you can contact us directly using the button below.
+        </div>
+
+        <a
+          href="https://wa.me/8801742313132?text=Hi%2C%20I%20submitted%20a%20request%20on%20your%20website.%20Please%20contact%20me."
+          target="_blank"
+          class="wa-btn"
+        >
+          💬 Contact via WhatsApp
+        </a>
+      </div>
+    </div>
+
   </div>
 </section>
+
+<style>
+.confirm-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px 15px;
+}
+
+.confirm-box{
+  background:#0f172a;
+  color:#fff;
+  max-width:420px;
+  width:100%;
+  padding:35px 25px;
+  border-radius:16px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+.confirm-box h2{
+  margin:15px 0 10px;
+  font-size:22px;
+}
+
+.confirm-box p{
+  color:#cbd5e1;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.checkmark{
+  width:60px;
+  height:60px;
+  background:#22c55e;
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  margin:0 auto 10px;
+}
+
+.note{
+  background:#020617;
+  border:1px dashed #334155;
+  padding:12px;
+  margin:20px 0;
+  font-size:13px;
+  border-radius:8px;
+  color:#e5e7eb;
+}
+
+.wa-btn{
+  display:inline-block;
+  background:#25D366;
+  color:#fff;
+  padding:14px 22px;
+  border-radius:10px;
+  font-weight:600;
+  text-decoration:none;
+  font-size:15px;
+}
+
+.wa-btn:hover{
+  opacity:.9;
+}
+</style>
+
+<script>
+const form = document.getElementById("leadForm");
+const confirmPage = document.getElementById("confirmationPage");
+const formWrap = document.querySelector(".form-wrap");
+
+form.addEventListener("submit", function () {
+  setTimeout(() => {
+    formWrap.style.display = "none";
+    confirmPage.style.display = "flex";
+  }, 600);
+});
+</script>
+
 
 <!-- CTA -->
 <section class="cta">
